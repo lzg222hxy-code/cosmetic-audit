@@ -51,13 +51,3 @@ export enum AppView {
   SETTINGS = 'settings',
   REPORT = 'report'
 }
-
-// 补充定义：防止 npm run build 时 TypeScript 报错找不到 process
-declare global {
-  namespace NodeJS {
-    interface ProcessEnv {
-      API_KEY?: string;
-      [key: string]: string | undefined;
-    }
-  }
-}
