@@ -3,15 +3,14 @@ import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  // 加载环境变量，process.cwd() 需要类型断言以避免 TS 检查报错
-  const env = loadEnv(mode, process.cwd(), '');
+  // 修复：强制将 process 断言为 any，解决 Typescript 找不到 process.cwd 的报错
+  const env = loadEnv(mode, (process as any).cwd(), '');
   const apiKey = process.env.API_KEY || env.API_KEY || '';
 
   return {
     base: './', 
     plugins: [react()],
     define: {
-      // 确保在构建过程中 API Key 被正确注入到代码中
       'process.env.API_KEY': JSON.stringify(apiKey)
     },
     server: {
