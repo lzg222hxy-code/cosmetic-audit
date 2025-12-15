@@ -3,17 +3,16 @@ import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  // Load env file based on `mode` in the current working directory.
-  const env = loadEnv(mode, (process as any).cwd(), '');
+  // 加载本地 .env 文件
+  const env = loadEnv(mode, process.cwd(), '');
   
   return {
-    // 关键修改：设置基础路径为相对路径，这样既可以在本地运行，也可以在 GitHub Pages 子目录运行
     base: './', 
     plugins: [react()],
     define: {
-      // Polyfill process.env for the app code
-      // 在 GitHub Actions 构建时，它会读取仓库的 Secrets
-      'process.env.API_KEY': JSON.stringify(env.API_KEY)
+      // 关键修复：优先使用 process.env.API_KEY (GitHub Actions 环境)，其次使用 env.API_KEY (本地 .env 文件)
+      // 这样可以确保在 GitHub 构建时能正确读取到 Secrets
+      'process.env.API_KEY': JSON.stringify(process.env.API_KEY || env.API_KEY)
     },
     server: {
       host: true,
