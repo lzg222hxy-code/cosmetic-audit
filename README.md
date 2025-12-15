@@ -1,20 +1,35 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# 化妆品生产工艺智能审核系统 (CPA)
 
-# Run and deploy your AI Studio app
+<!-- 部署状态徽章 -->
+[![Deploy to GitHub Pages](https://github.com/lzg222hxy-code/cosmetic-audit/actions/workflows/deploy.yml/badge.svg)](https://github.com/lzg222hxy-code/cosmetic-audit/actions/workflows/deploy.yml)
 
-This contains everything you need to run your app locally.
+## 🚀 软件入口
+**>>> [点击这里直接打开软件](https://lzg222hxy-code.github.io/cosmetic-audit/) <<<**
 
-View your app in AI Studio: https://ai.studio/apps/drive/1MoYQD97teIqhqFQPPNPmoJzddTsqlSqx
+*(如果在 404 页面，请等待 1-2 分钟后刷新)*
 
-## Run Locally
+---
 
-**Prerequisites:**  Node.js
+## 👋 欢迎使用
+这是为您定制的 **乳化车间工艺审核工具**，符合中国 GMPC 法规要求。
 
+### ✅ 您只需要做三件事：
+1. **点击上面的链接** 打开软件。
+2. 在网页中 **上传 PDF** 或使用 **范本**。
+3. 如果是首次使用，软件会提示您检查 API Key（只要上方徽章是绿色的 Passing，通常 Key 就已就绪）。
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+---
+
+### 📋 核心功能
+*   **配料单计算**：自动核对总量是否 100%。
+*   **工艺合规**：检查是否有“适量”、“少许”等模糊词汇。
+*   **设备校验**：自动识别 FMA 系列乳化机，检查转速/温度是否超限。
+
+---
+
+### 🔒 安全提示
+*   本仓库虽然是 **Public**（公开），但只包含**代码逻辑**。
+*   您的 **配方数据** 和 **上传的 PDF** 只在浏览器内存中处理，**绝不会上传**到这里。
+*   请放心使用。
+
+*(忽略此文件下方的任何技术代码，您作为用户无需关心)*
