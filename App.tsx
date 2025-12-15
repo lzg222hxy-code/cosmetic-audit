@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Beaker, Settings as SettingsIcon, PlayCircle, RotateCcw, UploadCloud, Globe, Server, Save, CheckCircle2, XCircle, AlertTriangle } from 'lucide-react';
+import { Beaker, Settings as SettingsIcon, PlayCircle, RotateCcw, UploadCloud, Globe, Server, Save, CheckCircle2, XCircle, AlertTriangle, Key } from 'lucide-react';
 import InputForm from './components/InputForm';
 import ParameterConfig from './components/ParameterConfig';
 import ReportView from './components/ReportView';
@@ -48,7 +48,11 @@ const App: React.FC = () => {
     modelName: 'gemini-2.5-flash'
   });
 
-  const hasApiKey = !!process.env.API_KEY;
+  // 获取 Key 并进行简单验证
+  const rawKey = process.env.API_KEY || '';
+  const hasApiKey = rawKey.length > 0;
+  // 隐藏大部分字符，用于诊断
+  const maskedKey = hasApiKey ? `${rawKey.substring(0, 4)}...${rawKey.substring(rawKey.length - 4)}` : 'Empty';
 
   const handleAudit = async () => {
     if (!pdfBase64 && !demoText) {
@@ -69,7 +73,7 @@ const App: React.FC = () => {
         textData: demoText,
         equipmentProfiles: profiles,
         settings
-      }, process.env.API_KEY as string);
+      }, rawKey);
       
       setResult(auditResult);
       setView(AppView.REPORT);
@@ -116,6 +120,24 @@ const App: React.FC = () => {
              </div>
              
              <div className="space-y-4">
+                <div className="bg-slate-50 p-3 rounded-lg border border-slate-200">
+                   <h4 className="text-xs font-bold text-slate-500 uppercase mb-2">系统诊断</h4>
+                   <div className="flex justify-between items-center text-sm">
+                      <span className="text-slate-600">API Key 状态:</span>
+                      <code className={`px-2 py-0.5 rounded font-mono text-xs ${hasApiKey ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                        {hasApiKey ? '已加载' : '未找到'}
+                      </code>
+                   </div>
+                   <div className="flex justify-between items-center text-sm mt-1">
+                      <span className="text-slate-600">Key 预览:</span>
+                      <code className="text-slate-500 text-xs">{maskedKey}</code>
+                   </div>
+                   <div className="flex justify-between items-center text-sm mt-1">
+                      <span className="text-slate-600">Key 长度:</span>
+                      <code className="text-slate-500 text-xs">{rawKey.length} chars</code>
+                   </div>
+                </div>
+
                 <div>
                    <label className="block text-sm font-medium text-slate-700 mb-1">模型选择 (Model)</label>
                    <select 
@@ -127,7 +149,6 @@ const App: React.FC = () => {
                       <option value="gemini-2.0-flash-exp">Gemini 2.0 Flash Exp</option>
                       <option value="gemini-1.5-pro">Gemini 1.5 Pro</option>
                    </select>
-                   <p className="text-xs text-slate-500 mt-1">如需使用国内模型，请确保 Base URL 支持该模型格式。</p>
                 </div>
 
                 <div>
@@ -214,10 +235,10 @@ const App: React.FC = () => {
           <div className="mb-6 bg-amber-50 border border-amber-200 text-amber-900 px-4 py-4 rounded-lg flex items-start gap-3 shadow-sm no-print animate-pulse">
              <AlertTriangle className="w-6 h-6 text-amber-600 flex-shrink-0 mt-0.5" />
              <div>
-                <span className="font-bold block mb-1">正在连接安全中心...</span> 
+                <span className="font-bold block mb-1">正在等待密钥注入... (v1.2.5)</span> 
                 <p className="text-sm opacity-90 leading-relaxed">
-                   API Key 已配置成功。正在等待系统重新部署 (v1.2.4)。<br/>
-                   请耐心等待 1-2 分钟，然后<strong>刷新此页面</strong>，绿色指示灯将亮起。
+                   您的 Secrets 配置是正确的。系统正在后台重新编译。<br/>
+                   如果长时间不亮绿灯，请点击右上角 <strong>齿轮图标</strong> 查看“系统诊断”，那里会显示 Key 是否为空。
                 </p>
              </div>
           </div>
@@ -324,11 +345,11 @@ const App: React.FC = () => {
                 <div className={`flex items-center gap-2 px-3 py-1 rounded-full border transition-colors ${hasApiKey ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'}`}>
                     <div className={`w-2 h-2 rounded-full ${hasApiKey ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`}></div>
                     <span className={`text-xs font-bold ${hasApiKey ? 'text-green-700' : 'text-red-700'}`}>
-                        {hasApiKey ? 'System Online (Key Verified)' : 'Key Missing'}
+                        {hasApiKey ? 'System Online' : 'Key Missing'}
                     </span>
                 </div>
                 <div className="hidden md:block text-slate-400">
-                   GMPC RuleSet: <span className="text-green-600">v2.4 (App v1.2.4)</span>
+                   GMPC RuleSet: <span className="text-green-600">v2.4 (App v1.2.5)</span>
                 </div>
             </div>
             
