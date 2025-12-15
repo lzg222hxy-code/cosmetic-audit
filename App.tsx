@@ -214,10 +214,10 @@ const App: React.FC = () => {
           <div className="mb-6 bg-amber-50 border border-amber-200 text-amber-900 px-4 py-4 rounded-lg flex items-start gap-3 shadow-sm no-print animate-pulse">
              <AlertTriangle className="w-6 h-6 text-amber-600 flex-shrink-0 mt-0.5" />
              <div>
-                <span className="font-bold block mb-1">配置检查中... (API Key 未检测到)</span> 
+                <span className="font-bold block mb-1">正在连接安全中心...</span> 
                 <p className="text-sm opacity-90 leading-relaxed">
-                   如果您已配置 GitHub Secrets，请等待构建完成（约1分钟）后刷新页面。<br/>
-                   如果从未配置，请前往 GitHub 仓库 -> Settings -> Secrets -> Actions 添加 <strong>API_KEY</strong>。
+                   API Key 已配置成功。正在等待系统重新部署 (v1.2.4)。<br/>
+                   请耐心等待 1-2 分钟，然后<strong>刷新此页面</strong>，绿色指示灯将亮起。
                 </p>
              </div>
           </div>
@@ -328,7 +328,7 @@ const App: React.FC = () => {
                     </span>
                 </div>
                 <div className="hidden md:block text-slate-400">
-                   GMPC RuleSet: <span className="text-green-600">v2.4 (App v1.1.3)</span>
+                   GMPC RuleSet: <span className="text-green-600">v2.4 (App v1.2.4)</span>
                 </div>
             </div>
             
