@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  // 修复：强制将 process 断言为 any，解决 Typescript 找不到 process.cwd 的报错
+  // 加载环境变量，(process as any) 强制绕过 TS 检查
   const env = loadEnv(mode, (process as any).cwd(), '');
   const apiKey = process.env.API_KEY || env.API_KEY || '';
 
@@ -11,6 +11,7 @@ export default defineConfig(({ mode }) => {
     base: './', 
     plugins: [react()],
     define: {
+      // 确保构建时注入 API KEY
       'process.env.API_KEY': JSON.stringify(apiKey)
     },
     server: {
