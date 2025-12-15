@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>化妆品生产工艺智能审核系统 (GMPC)</title>
+    <title>CPA - 化妆品生产工艺智能审核系统 (乳化/GMPC)</title>
     <!-- 使用 Tailwind CDN 快速构建样式 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@
       ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
       ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
-      /* 打印样式优化，确保生成的报告美观 */
+      /* 打印样式优化 */
       @media print {
         @page { margin: 10mm; size: A4; }
         body { background-color: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -24,25 +24,24 @@
         main { padding: 0 !important; max-width: 100% !important; margin: 0 !important; width: 100% !important; }
         .shadow-sm, .shadow-md, .shadow-2xl { box-shadow: none !important; border: 1px solid #e2e8f0; }
         .bg-slate-50 { background-color: white !important; }
-        /* 防止表格和内容块在分页时被切断 */
         .break-inside-avoid { break-inside: avoid; page-break-inside: avoid; }
       }
     </style>
-  <script type="importmap">
+<script type="importmap">
 {
   "imports": {
     "react": "https://esm.sh/react@^19.2.3",
     "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
     "react/": "https://esm.sh/react@^19.2.3/",
     "@google/genai": "https://esm.sh/@google/genai@^1.33.0",
+    "pdfjs-dist": "https://esm.sh/pdfjs-dist@^5.4.449",
     "lucide-react": "https://esm.sh/lucide-react@^0.561.0",
-    "recharts": "https://esm.sh/recharts@^3.5.1",
-    "vite": "https://esm.sh/vite@^7.2.7",
+    "recharts": "https://esm.sh/recharts@^3.6.0",
+    "vite": "https://esm.sh/vite@^7.3.0",
     "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
 </head>
   <body>
     <div id="root"></div>
