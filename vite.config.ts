@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  // 加载环境变量，(process as any) 强制绕过 TS 检查
+  // 强制忽略类型检查，确保环境变量能正常加载
   const env = loadEnv(mode, (process as any).cwd(), '');
   const apiKey = process.env.API_KEY || env.API_KEY || '';
 
@@ -11,7 +11,6 @@ export default defineConfig(({ mode }) => {
     base: './', 
     plugins: [react()],
     define: {
-      // 确保构建时注入 API KEY
       'process.env.API_KEY': JSON.stringify(apiKey)
     },
     server: {
@@ -21,7 +20,10 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       outDir: 'dist',
-      sourcemap: false
+      sourcemap: false,
+      commonjsOptions: {
+        transformMixedEsModules: true
+      }
     }
   };
 });
