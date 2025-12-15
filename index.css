@@ -1,0 +1,18 @@
+/* 
+  在预览模式下，我们使用 CDN 加载 Tailwind CSS，
+  所以这里不需要 @tailwind 指令，否则会导致浏览器报错。
+  
+  如果您后续进行本地构建 (npm run build)，可以取消下面代码的注释。
+*/
+
+/* 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+*/
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

@@ -1,0 +1,5 @@
+{
+  "name": "CosmeticProcessAuditor",
+  "description": "基于AI的化妆品生产工艺与配方审核系统，符合GMPC法规要求，用于乳化部门的工艺合规性检查。",
+  "requestFramePermissions": []
+}
