@@ -211,13 +211,13 @@ const App: React.FC = () => {
       {/* Main Content */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-8">
         {!hasApiKey && (
-          <div className="mb-6 bg-amber-50 border border-amber-200 text-amber-900 px-4 py-4 rounded-lg flex items-start gap-3 shadow-sm no-print">
+          <div className="mb-6 bg-amber-50 border border-amber-200 text-amber-900 px-4 py-4 rounded-lg flex items-start gap-3 shadow-sm no-print animate-pulse">
              <AlertTriangle className="w-6 h-6 text-amber-600 flex-shrink-0 mt-0.5" />
              <div>
-                <span className="font-bold block mb-1">系统正在初始化...</span> 
+                <span className="font-bold block mb-1">配置检查中... (API Key 未检测到)</span> 
                 <p className="text-sm opacity-90 leading-relaxed">
-                   如果您已配置 API Key，请等待 GitHub Actions 部署完成（约1-2分钟）。<br/>
-                   部署完成后，刷新此页面，下方指示灯将变绿。
+                   如果您已配置 GitHub Secrets，请等待构建完成（约1分钟）后刷新页面。<br/>
+                   如果从未配置，请前往 GitHub 仓库 -> Settings -> Secrets -> Actions 添加 <strong>API_KEY</strong>。
                 </p>
              </div>
           </div>
