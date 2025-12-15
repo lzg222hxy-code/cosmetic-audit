@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Beaker, Settings as SettingsIcon, PlayCircle, RotateCcw, UploadCloud, Globe, Server, Save } from 'lucide-react';
+import { Beaker, Settings as SettingsIcon, PlayCircle, RotateCcw, UploadCloud, Globe, Server, Save, CheckCircle2, XCircle, AlertTriangle } from 'lucide-react';
 import InputForm from './components/InputForm';
 import ParameterConfig from './components/ParameterConfig';
 import ReportView from './components/ReportView';
@@ -57,7 +57,7 @@ const App: React.FC = () => {
     }
 
     if (!hasApiKey) {
-        alert("系统未检测到 API Key，无法启动 AI 审核。");
+        alert("系统未检测到 API Key，无法启动 AI 审核。请在 GitHub Secrets 中配置 API_KEY。");
         return;
     }
 
@@ -169,7 +169,7 @@ const App: React.FC = () => {
               <Beaker className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h1 className="font-bold text-lg leading-tight text-slate-800">CPA 系统</h1>
+              <h1 className="font-bold text-lg leading-tight text-slate-800">CPA 系统 <span className="text-teal-600 text-xs ml-1 bg-teal-50 px-2 py-0.5 rounded-full border border-teal-100">乳化车间 (已加载 GMPC 范本)</span></h1>
               <p className="text-[10px] font-medium text-slate-400 tracking-wider">COSMETIC PROCESS AUDITOR</p>
             </div>
           </div>
@@ -210,6 +210,19 @@ const App: React.FC = () => {
 
       {/* Main Content */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-8">
+        {!hasApiKey && (
+          <div className="mb-6 bg-amber-50 border border-amber-200 text-amber-900 px-4 py-4 rounded-lg flex items-start gap-3 shadow-sm no-print">
+             <AlertTriangle className="w-6 h-6 text-amber-600 flex-shrink-0 mt-0.5" />
+             <div>
+                <span className="font-bold block mb-1">系统正在初始化...</span> 
+                <p className="text-sm opacity-90 leading-relaxed">
+                   如果您已配置 API Key，请等待 GitHub Actions 部署完成（约1-2分钟）。<br/>
+                   部署完成后，刷新此页面，下方指示灯将变绿。
+                </p>
+             </div>
+          </div>
+        )}
+
         {error && (
             <div className="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg flex items-center gap-2 no-print">
                 <span className="font-bold">Error:</span> {error}
@@ -307,9 +320,16 @@ const App: React.FC = () => {
       {/* Sticky Footer for Actions */}
       <footer className="bg-white border-t border-slate-200 py-4 sticky bottom-0 z-30 no-print">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
-            <div className="text-sm text-slate-400">
-                AI 模型: <span className="font-mono text-slate-600">{settings.modelName}</span> | GMPC 规则库: <span className="text-green-600">Active</span>
-                {settings.baseUrl && <span className="ml-2 text-xs text-orange-400 font-mono">(Proxy Active)</span>}
+            <div className="flex items-center gap-4 text-sm">
+                <div className={`flex items-center gap-2 px-3 py-1 rounded-full border transition-colors ${hasApiKey ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'}`}>
+                    <div className={`w-2 h-2 rounded-full ${hasApiKey ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`}></div>
+                    <span className={`text-xs font-bold ${hasApiKey ? 'text-green-700' : 'text-red-700'}`}>
+                        {hasApiKey ? 'System Online (Key Verified)' : 'Key Missing'}
+                    </span>
+                </div>
+                <div className="hidden md:block text-slate-400">
+                   GMPC RuleSet: <span className="text-green-600">v2.4 (App v1.1.3)</span>
+                </div>
             </div>
             
             <div className="flex gap-4">
@@ -325,7 +345,11 @@ const App: React.FC = () => {
                 <button
                     disabled={loading || !hasApiKey}
                     onClick={handleAudit}
-                    className={`flex items-center gap-2 px-8 py-2.5 rounded-lg shadow-md transition-all ${loading ? 'bg-slate-100 text-slate-400 cursor-wait' : 'bg-teal-600 hover:bg-teal-700 text-white hover:shadow-lg'}`}
+                    className={`flex items-center gap-2 px-8 py-2.5 rounded-lg shadow-md transition-all ${
+                        loading ? 'bg-slate-100 text-slate-400 cursor-wait' : 
+                        hasApiKey ? 'bg-teal-600 hover:bg-teal-700 text-white hover:shadow-lg hover:shadow-teal-200/50' : 
+                        'bg-slate-300 text-white cursor-not-allowed'
+                    }`}
                 >
                     {loading ? (
                         <>
