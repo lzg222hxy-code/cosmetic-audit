@@ -190,7 +190,7 @@ const App: React.FC = () => {
               <Beaker className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h1 className="font-bold text-lg leading-tight text-slate-800">CPA 系统 <span className="text-teal-600 text-xs ml-1 bg-teal-50 px-2 py-0.5 rounded-full border border-teal-100">乳化车间 (已加载 GMPC 范本)</span></h1>
+              <h1 className="font-bold text-lg leading-tight text-slate-800">CPA 系统 <span className="text-teal-600 text-xs ml-1 bg-teal-50 px-2 py-0.5 rounded-full border border-teal-100">正式版 v1.3</span></h1>
               <p className="text-[10px] font-medium text-slate-400 tracking-wider">COSMETIC PROCESS AUDITOR</p>
             </div>
           </div>
@@ -235,7 +235,7 @@ const App: React.FC = () => {
           <div className="mb-6 bg-amber-50 border border-amber-200 text-amber-900 px-4 py-4 rounded-lg flex items-start gap-3 shadow-sm no-print animate-pulse">
              <AlertTriangle className="w-6 h-6 text-amber-600 flex-shrink-0 mt-0.5" />
              <div>
-                <span className="font-bold block mb-1">正在等待密钥注入... (v1.2.5)</span> 
+                <span className="font-bold block mb-1">正在等待密钥注入... </span> 
                 <p className="text-sm opacity-90 leading-relaxed">
                    您的 Secrets 配置是正确的。系统正在后台重新编译。<br/>
                    如果长时间不亮绿灯，请点击右上角 <strong>齿轮图标</strong> 查看“系统诊断”，那里会显示 Key 是否为空。
@@ -349,7 +349,7 @@ const App: React.FC = () => {
                     </span>
                 </div>
                 <div className="hidden md:block text-slate-400">
-                   GMPC RuleSet: <span className="text-green-600">v2.4 (App v1.2.5)</span>
+                   GMPC RuleSet: <span className="text-green-600">v2.4 (App v1.3)</span>
                 </div>
             </div>
             
